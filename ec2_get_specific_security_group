@@ -1,5 +1,12 @@
 aws ec2 describe-instances \
     --profile sandbox \
-    --filters "Name=instance.group-id,Values=" \
+    --filters "Name=instance.group-id,Values=<value>" \
     --query 'Reservations[*].Instances[*].{Instance:InstanceId,AZ:Placement.AvailabilityZone,Name:Tags[?Key==`Name`]|[0].Value}' \
+    --output table
+
+# get private and public IP
+aws ec2 describe-instances \
+    --profile sandbox \
+    --filters "Name=instance.group-id,Values=<value>" \
+    --query 'Reservations[*].Instances[*].{Instance:InstanceId,PrivateIP:PrivateIpAddress,PublicIP:PublicIPAddress,Name:Tags[?Key==`Name`]|[0].Value}' \
     --output table
