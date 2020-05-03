@@ -1,0 +1,1 @@
+aws ec2 describe-volumes --profile root --region ap-southeast-1 --filters 'Name=status,Values=available' --query 'Volumes[*].{Name:Tags[?Key==`Name`]|[0].Value,AvailabilityZone:AvailabilityZone,CreateTime:CreateTime,SnapshotId:SnapshotId,VolumeId:VolumeId,VolumeType:VolumeType,Size:Size,Iops:Iops}'  --output table
